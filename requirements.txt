@@ -1,0 +1,4 @@
+certifi==14.05.14
+fenixedu==1.0.0
+fenixedu-django==0.0.1
+requests==2.4.0
