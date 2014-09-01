@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import User, check_password
 
 class FenixEduAuthenticationBackend(object):
-	def add_tokens_to_request(self, request, fenixeduUser):
+	def add_info_to_session(self, request, fenixeduUser):
 		request.session['access_token'] = fenixeduUser.access_token
 		request.session['refresh_token'] = fenixeduUser.refresh_token
 
@@ -23,7 +23,7 @@ class FenixEduAuthenticationBackend(object):
 					last_name = name_parts[len(name_parts) - 1]
 				user = User(username=username, first_name=first_name, last_name=last_name)
 				user.save()
-			self.add_tokens_to_request(request, fenixeduUser)
+			self.add_info_to_request(request, fenixeduUser)
 			return user
 		else:
 			return None
