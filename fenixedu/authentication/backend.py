@@ -23,7 +23,7 @@ class FenixEduAuthenticationBackend(object):
 					last_name = name_parts[len(name_parts) - 1]
 				user = User(username=username, first_name=first_name, last_name=last_name)
 				user.save()
-			self.add_info_to_request(request, fenixeduUser)
+			self.add_info_to_session(request, fenixeduUser)
 			return user
 		else:
 			return None
