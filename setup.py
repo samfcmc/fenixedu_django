@@ -3,7 +3,7 @@
 from distutils.core import setup, Extension
 
 setup(name='fenixedu_django',
-		version='0.0.1',
+		version='1.0.0',
 		description='FenixEdu Django utilities',
 		author='Samuel Coelho',
 		author_email='samuelfcmc@gmail.com',
