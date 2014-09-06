@@ -22,7 +22,7 @@ If you don't know what the hell is FenixEdu check it out
 
 * Install fenixedu django
 
-<code></code>
+<code>pip install fenixedu-django</code>
 
 ## Usage
 
