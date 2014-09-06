@@ -18,25 +18,31 @@ If you don't know what the hell is FenixEdu check it out
 
 * If you don't have fenixedu installed, install it first
 
-<code>pip install fenixedu</code>
+```
+pip install fenixedu
+```
 
 * Install fenixedu django
 
-<code>pip install fenixedu-django</code>
+```
+pip install fenixedu-django
+```
 
 ## Usage
 
 * Add the FenixEdu authentication backend to your settings.py
 
-<code>
-	AUTHENTICATION_BACKENDS = (
-    	'fenixedu.authentication.backend.FenixEduAuthenticationBackend',
-    )
-</code>
+```python
+AUTHENTICATION_BACKENDS = (
+	'fenixedu.authentication.backend.FenixEduAuthenticationBackend',
+)
+```
 
 * Import fenixedu
 
-<code>import fenixedu</code>
+```python
+import fenixedu
+```
 
 * Instatiatie the FenixEdu Client
 
@@ -44,7 +50,9 @@ If you don't know what the hell is FenixEdu check it out
 
 <a href="https://github.com/samfcmc/fenixedu-python-sdk">FenixEdu Python SDK repository</a>
 
-<code>client = fenixedu.FenixEduClient(...)</code>
+```python
+client = fenixedu.FenixEduClient(...)
+```
 
 * Add a link to the authentication url in your web page
 
@@ -52,41 +60,42 @@ If you don't know what the hell is FenixEdu check it out
 
 *** In views.py
 
-<code>
-	def index(request):
-		context = {'auth_url': client.get_authentication_url()}
-		return render(request, 'index.html', context)
-</code>
+```python
+def index(request):
+	context = {'auth_url': client.get_authentication_url()}
+	return render(request, 'index.html', context)
+```
 
 *** In index.html
 
-<code>
-	<a href="{{ auth_url }}">Login</a>
-</code>
+```
+<a href="{{ auth_url }}">Login</a>
+```
 
 * After the user logged in and authorized your application he will be redirected to the redirect URL,
 which will have a code parameter
 
 * In the view that will receive the code do the following:
 
-<code>
-	code = request.GET.get('code', None)
-	if code is not None and not request.user.is_authenticated():
-		user = authenticate(request=request, client=client, code=code)
-		if user is not None:
-			login(request, user)
-</code> 
+```python
+code = request.GET.get('code', None)
+if code is not None and not request.user.is_authenticated():
+	user = authenticate(request=request, client=client, code=code)
+	if user is not None:
+		login(request, user)
+
+```
 
 * Now your user is authenticated.
 
 * If you want to use FenixEdu API endpoints of private scope you can get the user object from the request
 
-<code>
-	from fenixedu.authentication import users
-	...
-	user = users.get_fenixedu_user(request)
-	# Example: get person
-	person = client.get_person(user=user)
-</code>
+```python
+from fenixedu.authentication import users
+...
+user = users.get_fenixedu_user(request)
+# Example: get person
+person = client.get_person(user=user)
+```
 
 Any bug, request or anything else just open an issue ;)
